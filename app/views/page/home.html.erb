@@ -1,0 +1,22 @@
+<h1>Recherches utilisateurs github</h1>
+<%= form_tag "/page/home", method: "post" do %>
+    <input type="text" name="user" />
+    <input type="submit" value="rechercher" />
+<% end %>
+
+<% if @data != nil %>
+	<% if @data['items'].any? %>
+		<h3>Pseudo : <%= @data['items'][0]['login'] %></h3>
+		<img src="<%= @data['items'][0]['avatar_url'] %>"/>
+		<br>
+		<a href="https://github.com/<%= @data['items'][0]['login'] %>">Profil github</a>
+		<br>
+
+		<h2>repos : <%= @repos[0]['language'] %></h2>
+		<h3>Langues : <%= @langues %></h3>
+		
+	<% elsif @data['items'].empty? %>
+		<%= "Recherche inconnue" %>
+	<% end %>
+<% end %>
+
